@@ -1,22 +1,29 @@
+import { join } from "node:path";
+
+import { fastifyAutoload } from "@fastify/autoload";
 import fastifyEnv from "@fastify/env";
-import type { PostgreSqlDriver } from "@mikro-orm/postgresql";
-import { MikroORM } from "@mikro-orm/postgresql";
-import type { FastifyInstance, FastifyServerOptions } from "fastify";
+import type { FastifyServerOptions } from "fastify";
 import fastify from "fastify";
 
 import { ApiEnvSchema } from "./env";
-import config from "./mikro-orm.config";
 
 declare module "fastify" {
-    type FastifyInstance = {
+    // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+    interface FastifyInstance {
         config: {
+            NODE_ENV: "development" | "production" | "test";
             HOST: string;
             PORT: number;
+            DB_HOST: string;
+            DB_PORT: number;
+            DB_USER: string;
+            DB_PASSWORD: string;
+            DB_NAME: string;
         };
-    };
+    }
 }
 
-const app = async (options: FastifyServerOptions = {}): Promise<FastifyInstance> => {
+const app = async (options: FastifyServerOptions = {}) => {
     const app = fastify(options);
 
     await app.register(fastifyEnv, {
@@ -25,8 +32,10 @@ const app = async (options: FastifyServerOptions = {}): Promise<FastifyInstance>
         schema: ApiEnvSchema,
     });
 
-    const orm = await MikroORM.init<PostgreSqlDriver>(config);
-    console.log(orm.em);
+    void app.register(fastifyAutoload, {
+        // eslint-disable-next-line unicorn/prefer-module
+        dir: join(__dirname, "plugins"),
+    });
     //   app.register(router, { prefix: '/api' });
 
     return app;

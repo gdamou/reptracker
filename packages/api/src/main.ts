@@ -15,11 +15,9 @@ const start = async () => {
         },
     });
     try {
-        const host: string = process.env.HOST ?? "localhost";
-        const port: number = Number.parseInt(process.env.PORT ?? "3000");
-        const address: string = await server.listen({ host, port });
-
-        console.log(`Server running at ${address}`);
+        const host = server.config.HOST;
+        const port = server.config.PORT;
+        await server.listen({ host, port });
     } catch (error) {
         server.log.error(error);
     }
