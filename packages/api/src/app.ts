@@ -6,6 +6,8 @@ import type { FastifyServerOptions } from "fastify";
 import fastify from "fastify";
 
 import { ApiEnvSchema } from "./env";
+import { userRoutes } from "./routes/users";
+import { MikroORM } from "@mikro-orm/postgresql";
 
 declare module "fastify" {
     // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
@@ -20,6 +22,7 @@ declare module "fastify" {
             DB_PASSWORD: string;
             DB_NAME: string;
         };
+        orm: MikroORM
     }
 }
 
@@ -36,7 +39,7 @@ const app = async (options: FastifyServerOptions = {}) => {
         // eslint-disable-next-line unicorn/prefer-module
         dir: join(__dirname, "plugins"),
     });
-    //   app.register(router, { prefix: '/api' });
+      app.register(userRoutes, { prefix: '/api' });
 
     return app;
 };
