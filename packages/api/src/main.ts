@@ -4,6 +4,7 @@ import app from "./app";
 
 const start = async () => {
     const server: FastifyInstance = await app({
+        maxParamLength: 5000,
         logger: {
             transport: {
                 target: "pino-pretty",
