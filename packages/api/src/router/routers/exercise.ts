@@ -1,8 +1,10 @@
+import { Exercise } from "../../entities/Exercise";
 import { publicProcedure, router } from "../trpc";
 
 export const exerciseRouter = router({
-    list: publicProcedure.query(() => {
+    list: publicProcedure.query(({ ctx }) => {
         // [..]
-        return [];
+        const fork = ctx.orm.em.fork();
+        return fork.find(Exercise, {});
     }),
 });
