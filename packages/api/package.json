@@ -26,6 +26,7 @@
     "pino": "^8.8.0",
     "pino-pretty": "^9.1.1",
     "superjson": "^1.12.2",
+    "trpc-playground": "^1.0.4",
     "zod": "^3.21.4"
   },
   "devDependencies": {
