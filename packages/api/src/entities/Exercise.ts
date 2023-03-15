@@ -15,7 +15,7 @@ export class Exercise extends CustomBaseEntity {
     @ManyToMany({ entity: () => Category, mappedBy: (category) => category.exercises })
     categories: Collection<Category> = new Collection<Category>(this);
 
-    @ManyToMany({ entity: () => Workout, mappedBy: (workout) => workout.exercises })
+    @ManyToMany({ entity: () => Workout, mappedBy: (workout) => workout.exercises, nullable: true })
     workouts: Collection<Workout> = new Collection<Workout>(this);
 
     @ManyToMany({ entity: () => Superset, pivotEntity: () => ExerciseSuperset, owner: true, nullable: true })
