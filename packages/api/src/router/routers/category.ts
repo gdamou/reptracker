@@ -7,30 +7,27 @@ import { publicProcedure, router } from "../trpc";
 
 export const categoryRouter = router({
     list: publicProcedure.query(({ ctx }) => {
-        const fork = ctx.orm.em.fork();
-        return fork.find(Category, {});
+        return ctx.orm.find(Category, {});
     }),
-    add: publicProcedure
+    create: publicProcedure
         .input(
             z.object({
                 name: z.string().nonempty(),
             })
         )
         .mutation(async ({ input, ctx }) => {
-            const fork = ctx.orm.em.fork();
-            const createdCategory = fork.create(Category, input);
-            await fork.flush();
+            const createdCategory = ctx.orm.create(Category, input);
+            await ctx.orm.flush();
             return createdCategory;
         }),
     remove: publicProcedure
         .input(
             z.object({
-                id: z.string().nonempty(),
+                id: z.string().uuid(),
             })
         )
         .mutation(async ({ input, ctx }) => {
-            const fork = ctx.orm.em.fork();
-            const foundCategory = await fork.findOne(Category, { id: input.id });
+            const foundCategory = await ctx.orm.findOne(Category, { id: input.id });
 
             if (!foundCategory)
                 throw new TRPCError({
@@ -38,7 +35,7 @@ export const categoryRouter = router({
                     message: `category "${input.id}" not found`,
                 });
 
-            await fork.removeAndFlush(foundCategory);
+            await ctx.orm.removeAndFlush(foundCategory);
             return {
                 status: "success",
                 data: null,
@@ -47,13 +44,12 @@ export const categoryRouter = router({
     changeName: publicProcedure
         .input(
             z.object({
-                id: z.string().nonempty(),
+                id: z.string().uuid(),
                 name: z.string().nonempty(),
             })
         )
         .mutation(async ({ input, ctx }) => {
-            const fork = ctx.orm.em.fork();
-            const foundCategory = await fork.findOne(Category, { id: input.id });
+            const foundCategory = await ctx.orm.findOne(Category, { id: input.id });
 
             if (!foundCategory)
                 throw new TRPCError({
@@ -65,7 +61,7 @@ export const categoryRouter = router({
                 name: input.name,
             });
 
-            await fork.flush();
+            await ctx.orm.flush();
 
             return {
                 status: "success",
