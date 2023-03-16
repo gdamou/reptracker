@@ -18,7 +18,10 @@ export const categoryRouter = router({
         .mutation(async ({ input, ctx }) => {
             const createdCategory = ctx.orm.create(Category, input);
             await ctx.orm.flush();
-            return createdCategory;
+            return {
+                status: "success",
+                data: createdCategory,
+            };
         }),
     remove: publicProcedure
         .input(
@@ -29,11 +32,12 @@ export const categoryRouter = router({
         .mutation(async ({ input, ctx }) => {
             const foundCategory = await ctx.orm.findOne(Category, { id: input.id });
 
-            if (!foundCategory)
+            if (!foundCategory) {
                 throw new TRPCError({
                     code: "NOT_FOUND",
                     message: `category "${input.id}" not found`,
                 });
+            }
 
             await ctx.orm.removeAndFlush(foundCategory);
             return {
@@ -51,11 +55,12 @@ export const categoryRouter = router({
         .mutation(async ({ input, ctx }) => {
             const foundCategory = await ctx.orm.findOne(Category, { id: input.id });
 
-            if (!foundCategory)
+            if (!foundCategory) {
                 throw new TRPCError({
                     code: "NOT_FOUND",
                     message: `category "${input.id}" not found`,
                 });
+            }
 
             wrap(foundCategory).assign({
                 name: input.name,
