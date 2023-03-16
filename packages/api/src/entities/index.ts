@@ -1,5 +1,4 @@
 import { Category } from "./Category";
-import { CategoryExercise } from "./CategoryExercise";
 import { Exercise } from "./Exercise";
 import { ExerciseSuperset } from "./ExerciseSuperset";
 import { Result } from "./Result";
@@ -11,7 +10,6 @@ import { WorkoutSuperset } from "./WorkoutSuperset";
 
 export const entities = [
     Category,
-    CategoryExercise,
     Exercise,
     ExerciseSuperset,
     Result,

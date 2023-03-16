@@ -140,14 +140,13 @@
     },
     {
       "columns": {
-        "id": {
-          "name": "id",
+        "category_id": {
+          "name": "category_id",
           "type": "uuid",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
-          "default": "gen_random_uuid()",
           "mappedType": "uuid"
         },
         "exercise_id": {
@@ -158,55 +157,16 @@
           "primary": false,
           "nullable": false,
           "mappedType": "uuid"
-        },
-        "category_id": {
-          "name": "category_id",
-          "type": "uuid",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "mappedType": "uuid"
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamptz(0)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": 6,
-          "mappedType": "datetime"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamptz(0)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": 6,
-          "mappedType": "datetime"
         }
       },
-      "name": "category_exercise",
+      "name": "category_exercises",
       "schema": "public",
       "indexes": [
         {
+          "keyName": "category_exercises_pkey",
           "columnNames": [
-            "id"
-          ],
-          "composite": false,
-          "keyName": "category_exercise_id_index",
-          "primary": false,
-          "unique": false
-        },
-        {
-          "keyName": "category_exercise_pkey",
-          "columnNames": [
-            "id",
-            "exercise_id",
-            "category_id"
+            "category_id",
+            "exercise_id"
           ],
           "composite": true,
           "primary": true,
@@ -215,28 +175,30 @@
       ],
       "checks": [],
       "foreignKeys": {
-        "category_exercise_exercise_id_foreign": {
-          "constraintName": "category_exercise_exercise_id_foreign",
-          "columnNames": [
-            "exercise_id"
-          ],
-          "localTableName": "public.category_exercise",
-          "referencedColumnNames": [
-            "id"
-          ],
-          "referencedTableName": "public.exercise",
-          "updateRule": "cascade"
-        },
-        "category_exercise_category_id_foreign": {
-          "constraintName": "category_exercise_category_id_foreign",
+        "category_exercises_category_id_foreign": {
+          "constraintName": "category_exercises_category_id_foreign",
           "columnNames": [
             "category_id"
           ],
-          "localTableName": "public.category_exercise",
+          "localTableName": "public.category_exercises",
           "referencedColumnNames": [
             "id"
           ],
           "referencedTableName": "public.category",
+          "deleteRule": "cascade",
+          "updateRule": "cascade"
+        },
+        "category_exercises_exercise_id_foreign": {
+          "constraintName": "category_exercises_exercise_id_foreign",
+          "columnNames": [
+            "exercise_id"
+          ],
+          "localTableName": "public.category_exercises",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.exercise",
+          "deleteRule": "cascade",
           "updateRule": "cascade"
         }
       }

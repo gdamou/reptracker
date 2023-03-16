@@ -12,7 +12,7 @@ export class Exercise extends CustomBaseEntity {
     @Property()
     name!: string;
 
-    @ManyToMany({ entity: () => Category, mappedBy: (category) => category.exercises })
+    @ManyToMany({ entity: () => Category, mappedBy: "exercises" })
     categories: Collection<Category> = new Collection<Category>(this);
 
     @ManyToMany({ entity: () => Workout, mappedBy: (workout) => workout.exercises, nullable: true })
