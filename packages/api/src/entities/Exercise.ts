@@ -3,7 +3,6 @@ import { Collection, Entity, ManyToMany, Property } from "@mikro-orm/core";
 
 import { Category } from "./Category";
 import { CustomBaseEntity } from "./CustomBaseEntity";
-import { ExerciseSuperset } from "./ExerciseSuperset";
 import { Superset } from "./Superset";
 import { Workout } from "./Workout";
 
@@ -18,6 +17,6 @@ export class Exercise extends CustomBaseEntity {
     @ManyToMany({ entity: () => Workout, mappedBy: (workout) => workout.exercises, nullable: true })
     workouts: Collection<Workout> = new Collection<Workout>(this);
 
-    @ManyToMany({ entity: () => Superset, pivotEntity: () => ExerciseSuperset, owner: true, nullable: true })
+    @ManyToMany({ entity: () => Superset, inversedBy: "exercises", nullable: true })
     supersets = new Collection<Superset>(this);
 }
