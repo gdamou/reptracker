@@ -16,7 +16,7 @@ export const exerciseRouter = router({
             })
         )
         .query(async ({ input, ctx }) => {
-            const foundExercise = await ctx.orm.find(Exercise, { id: input.id }, { populate: ["categories"] });
+            const foundExercise = await ctx.orm.findOne(Exercise, { id: input.id }, { populate: ["categories"] });
 
             if (!foundExercise) {
                 throw new TRPCError({
