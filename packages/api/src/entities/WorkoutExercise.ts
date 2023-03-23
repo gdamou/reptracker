@@ -22,4 +22,12 @@ export class WorkoutExercise extends CustomBaseEntity {
 
     @OneToMany(() => Result, (result) => result.workoutExercise)
     results = new Collection<Result>(this);
+
+    constructor(workout: Workout, exercise: Exercise, sets: number, repetitions: number) {
+        super();
+        this.workout = workout;
+        this.exercise = exercise;
+        this.sets = sets;
+        this.repetitions = repetitions;
+    }
 }
