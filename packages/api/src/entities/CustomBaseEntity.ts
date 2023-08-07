@@ -7,9 +7,9 @@ export abstract class CustomBaseEntity {
     @PrimaryKey({ type: "uuid", defaultRaw: "gen_random_uuid()" })
     id!: string;
 
-    @Property({ defaultRaw: "now" })
-    createdAt = new Date();
+    @Property()
+    createdAt: Date = new Date();
 
-    @Property({ defaultRaw: "now", onUpdate: () => new Date() })
-    updatedAt = new Date();
+    @Property({ onUpdate: () => new Date() })
+    updatedAt: Date = new Date();
 }

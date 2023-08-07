@@ -27,6 +27,8 @@ const db: FastifyPluginAsync<Options> = async (fastify) => {
 
     const schemaGenerator = orm.getSchemaGenerator();
     await schemaGenerator.ensureDatabase();
+    // create a new migration
+    // await orm.getMigrator().createMigration();
     await orm.getMigrator().up();
 
     fastify.decorate("orm", orm);

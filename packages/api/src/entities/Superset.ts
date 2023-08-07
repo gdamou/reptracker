@@ -1,9 +1,9 @@
 /* eslint-disable import/no-cycle */
-import { Collection, Entity, ManyToMany, Property } from "@mikro-orm/core";
+import { Collection, Entity, ManyToMany, OneToMany, Property } from "@mikro-orm/core";
 
 import { CustomBaseEntity } from "./CustomBaseEntity";
 import { Exercise } from "./Exercise";
-import { Workout } from "./Workout";
+import { WorkoutSuperset } from "./WorkoutSuperset";
 
 @Entity()
 export class Superset extends CustomBaseEntity {
@@ -13,6 +13,6 @@ export class Superset extends CustomBaseEntity {
     @ManyToMany({ entity: () => Exercise, mappedBy: (exercise) => exercise.supersets })
     exercises = new Collection<Superset>(this);
 
-    @ManyToMany({ entity: () => Workout, mappedBy: (workout) => workout.supersets })
-    workouts: Collection<Workout> = new Collection<Workout>(this);
+    @OneToMany(() => WorkoutSuperset, (workoutSuperset) => workoutSuperset.superset)
+    workouts = new Collection<WorkoutSuperset>(this);
 }

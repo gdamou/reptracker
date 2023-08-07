@@ -1,23 +1,22 @@
 /* eslint-disable import/no-cycle */
-import { Collection, Entity, ManyToMany, Property } from "@mikro-orm/core";
+import { Collection, Entity, ManyToMany, OneToMany, Property } from "@mikro-orm/core";
 
 import { Category } from "./Category";
 import { CustomBaseEntity } from "./CustomBaseEntity";
-import { ExerciseSuperset } from "./ExerciseSuperset";
 import { Superset } from "./Superset";
-import { Workout } from "./Workout";
+import { WorkoutExercise } from "./WorkoutExercise";
 
 @Entity()
 export class Exercise extends CustomBaseEntity {
     @Property()
     name!: string;
 
-    @ManyToMany({ entity: () => Category, mappedBy: (category) => category.exercises })
+    @ManyToMany({ entity: () => Category, mappedBy: "exercises" })
     categories: Collection<Category> = new Collection<Category>(this);
 
-    @ManyToMany({ entity: () => Workout, mappedBy: (workout) => workout.exercises })
-    workouts: Collection<Workout> = new Collection<Workout>(this);
+    @OneToMany(() => WorkoutExercise, (workoutExercise) => workoutExercise.exercise)
+    workouts = new Collection<WorkoutExercise>(this);
 
-    @ManyToMany({ entity: () => Superset, pivotEntity: () => ExerciseSuperset, owner: true, nullable: true })
+    @ManyToMany({ entity: () => Superset, inversedBy: "exercises", nullable: true })
     supersets = new Collection<Superset>(this);
 }
