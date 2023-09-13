@@ -1,11 +1,17 @@
 {
-  "name": "reptracker",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
+    "name": "reptracker",
+    "private": true,
+    "version": "1.0.0",
+    "scripts": {
+        "dev": "pnpm run --parallel dev"
+    },
+    "workspaces": [
+        "packages/*"
+    ],
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^5.50.0",
+        "@typescript-eslint/parser": "^5.50.0",
+        "eslint": "^8.45.0",
+        "typescript": "^5.0.2"
+    }
 }
