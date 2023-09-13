@@ -1,0 +1,10 @@
+{
+    "files": [],
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@monorepo/*": ["packages/*"]
+        }
+    },
+    "references": [{ "path": "./packages/api" }, { "path": "./packages/front" }]
+}

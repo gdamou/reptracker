@@ -1,16 +1,18 @@
 {
-  "compilerOptions": {
-    "outDir": "./build",
-    "target": "es2018",
-    "module": "commonjs",
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "removeComments": true,
-    "declaration": true,
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-  },
-  "exclude": ["node_modules", "build"],
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./build",
+        "target": "es2018",
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "removeComments": true,
+        "declaration": true,
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "composite": true
+    },
+    "exclude": ["node_modules", "build"]
 }
