@@ -23,7 +23,7 @@
         "pino-pretty": "^9.1.1",
         "superjson": "^1.12.2",
         "trpc-playground": "^1.0.4",
-        "zod": "^3.21.4"
+        "zod": "^3.22.3"
     },
     "devDependencies": {
         "@astahmer/eslint-config-ts": "^0.1.5",
