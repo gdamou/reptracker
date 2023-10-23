@@ -11,7 +11,7 @@
     "dependencies": {
         "@fastify/autoload": "^5.7.1",
         "@fastify/env": "^4.2.0",
-        "@mikro-orm/cli": "^5.6.8",
+        "@mikro-orm/cli": "^5.8.10",
         "@mikro-orm/core": "^5.6.8",
         "@mikro-orm/migrations": "^5.8.10",
         "@mikro-orm/postgresql": "^5.6.8",
