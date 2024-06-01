@@ -9,9 +9,9 @@
         "packages/*"
     ],
     "devDependencies": {
-        "@typescript-eslint/eslint-plugin": "^7.8.0",
-        "@typescript-eslint/parser": "^7.8.0",
-        "eslint": "^9.1.1",
+        "@typescript-eslint/eslint-plugin": "^7.11.0",
+        "@typescript-eslint/parser": "^7.11.0",
+        "eslint": "^9.4.0",
         "typescript": "^5.4.5"
     }
 }
