@@ -9,15 +9,15 @@
         "dev": "tsx watch src/main.ts | pino-pretty"
     },
     "dependencies": {
-        "@fastify/autoload": "^6.0.3",
-        "@fastify/env": "^5.0.1",
-        "@mikro-orm/cli": "^6.4.2",
-        "@mikro-orm/core": "^6.4.2",
-        "@mikro-orm/migrations": "^6.4.2",
-        "@mikro-orm/postgresql": "^6.4.2",
-        "@mikro-orm/reflection": "^6.4.2",
+        "@fastify/autoload": "^6.1.0",
+        "@fastify/env": "^5.0.2",
+        "@mikro-orm/cli": "^6.4.5",
+        "@mikro-orm/core": "^6.4.5",
+        "@mikro-orm/migrations": "^6.4.5",
+        "@mikro-orm/postgresql": "^6.4.5",
+        "@mikro-orm/reflection": "^6.4.5",
         "@trpc/server": "^10.45.2",
-        "fastify": "^5.2.0",
+        "fastify": "^5.2.1",
         "fastify-plugin": "^5.0.1",
         "pino": "^9.6.0",
         "pino-pretty": "^13.0.0",
@@ -27,7 +27,7 @@
     },
     "devDependencies": {
         "@astahmer/eslint-config-ts": "^0.1.5",
-        "@types/node": "^22.10.3",
+        "@types/node": "^22.13.0",
         "eslint-formatter-pretty": "^6.0.1",
         "prettier": "^3.4.2",
         "tsx": "^4.19.2"
